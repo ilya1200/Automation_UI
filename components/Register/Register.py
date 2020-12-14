@@ -14,7 +14,7 @@ class Register:
 
     @property
     def first_name(self) -> str:
-        return self.element.find_element(*self.locators.first_name).text
+        return self.element.find_element(*self.locators.first_name).get_attribute('value')
 
     @first_name.setter
     def first_name(self, f_name: str):
@@ -22,7 +22,7 @@ class Register:
 
     @property
     def last_name(self) -> str:
-        return self.element.find_element(*self.locators.last_name).text
+        return self.element.find_element(*self.locators.last_name).get_attribute('value')
 
     @last_name.setter
     def last_name(self, l_name: str):
@@ -30,7 +30,7 @@ class Register:
 
     @property
     def email_address(self) -> str:
-        return self.element.find_element(*self.locators.email_address).text
+        return self.element.find_element(*self.locators.email_address).get_attribute('value')
 
     @email_address.setter
     def email_address(self, email_address: str):
@@ -38,7 +38,7 @@ class Register:
 
     @property
     def phone(self) -> str:
-        return self.element.find_element(*self.locators.phone).text
+        return self.element.find_element(*self.locators.phone).get_attribute('value')
 
     @phone.setter
     def phone(self, phone: str):
@@ -49,23 +49,24 @@ class Register:
         male = self.element.find_element(*self.locators.gender_male)
         female = self.element.find_element(*self.locators.gender_female)
         if male.is_selected():
-            return male.text
+            return male.get_attribute('value').lower()
         if female.is_selected():
-            return male.text
+            return female.get_attribute('value').lower()
 
     @gender.setter
     def gender(self, gender: str):
         if gender == "male":
             self.element.find_element(*self.locators.gender_male).click()
         elif gender == "female":
-            self.element.find_element(*self.locators.gender_male).click()
-        raise ValueError(f"Unexpected gender value:{gender}")
+            self.element.find_element(*self.locators.gender_female).click()
+        else:
+            raise ValueError(f"Unexpected gender value:{gender}")
 
     @property
     def country(self) -> str:
         country_dropdown = Select(self.element.find_element(*self.locators.country_dropdown))
-        selected_options = country_dropdown.all_selected_options()
-        selected_option = selected_options[0].text
+        selected_options = country_dropdown.all_selected_options
+        selected_option = selected_options[0].get_attribute('value')
         return selected_option
 
     @country.setter
