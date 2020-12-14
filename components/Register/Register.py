@@ -73,3 +73,9 @@ class Register:
     def country(self, country: str):
         country_dropdown = Select(self.element.find_element(*self.locators.country_dropdown))
         country_dropdown.select_by_visible_text(country)
+
+    def submit(self):
+        self.element.find_element(*self.locators.submit_btn).click()
+
+    def refresh(self):
+        self.element.find_element(*self.locators.refresh_btn).click()

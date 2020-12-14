@@ -12,6 +12,9 @@ class RegisterLocators:
         self.gender_female = (By.XPATH, '//input[@value="FeMale"]')
         self.country_dropdown = (By.XPATH, '//select[@ng-model="country"]')
         self.required = (By.XPATH, "//label[contains(text(),'*')]")
+        self.submit_btn = (By.XPATH, '//button[@id="submitbtn"]')
+        self.refresh_btn = (By.XPATH, '//button[@value="Refresh"]')
+
 
 
 

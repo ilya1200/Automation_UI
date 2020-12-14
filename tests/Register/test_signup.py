@@ -13,6 +13,7 @@ class TestSignUp:
         self.data = {
             "first_name": "Nissim",
             "last_name": "David",
+            "email_address": "nissim.david@Fmail.com",
             "phone": "0739118927",
             "gender": "male",
             "country": "United States"
@@ -24,14 +25,18 @@ class TestSignUp:
         self.register.first_name = self.data["first_name"]
         self.register.last_name = self.data["last_name"]
         self.register.phone = self.data["phone"]
+        self.register.email_address = self.data["email_address"]
         self.register.gender = self.data["gender"]
         self.register.country = self.data["country"]
 
         assert_that(self.register.first_name).is_equal_to(self.data["first_name"])
         assert_that(self.register.last_name).is_equal_to(self.data["last_name"])
         assert_that(self.register.phone).is_equal_to(self.data["phone"])
+        assert_that(self.register.email_address).is_equal_to(self.data["email_address"])
         assert_that(self.register.gender).is_equal_to(self.data["gender"])
         assert_that(self.register.country).is_equal_to(self.data["country"])
+
+        self.register.submit()
 
     def teardown_class(self):
         self.driver.close()
