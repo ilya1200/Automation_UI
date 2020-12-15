@@ -25,7 +25,8 @@ class TestUploadImage:
             "country": "United States",
             "date_of_birth": (12, "November", 2000),
             "password": "Aa102030",
-            "confirm_password": "Aa102030"
+            "confirm_password": "Aa102030",
+            "photo": r'C:\Users\user\Desktop\Automation_UI\assets\dog_image.jpg'
         }
 
     def test_upload_image(self):
@@ -40,7 +41,7 @@ class TestUploadImage:
         self.register.country = self.data["country"]
         self.register.password = self.data["password"]
         self.register.confirm_password = self.data["confirm_password"]
-        self.register.photo(r'C:\Users\user\Desktop\Automation_UI\assets\dog_image.jpg')
+        self.register.photo = self.data["photo"]
 
         assert_that(self.register.first_name).is_equal_to(self.data["first_name"])
         assert_that(self.register.last_name).is_equal_to(self.data["last_name"])
@@ -48,6 +49,7 @@ class TestUploadImage:
         assert_that(self.register.country).is_equal_to(self.data["country"])
         assert_that(self.register.gender).is_equal_to(self.data["gender"])
         assert_that(self.register.date_of_birth).is_equal_to(self.data["date_of_birth"])
+        assert_that(self.register.photo).contains("dog_image")
 
         self.register.submit()
         WebDriverWait(self.driver, self.LOAD_WAIT).until(EC.url_to_be(self.WEB_TABlE_URL))

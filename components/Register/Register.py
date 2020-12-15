@@ -115,9 +115,13 @@ class Register:
     def confirm_password(self, confirm_password: str):
         self.element.find_element(*self.locators.confirm_password).send_keys(confirm_password)
 
+    @property
+    def photo(self) -> str:
+        return self.element.find_element(*self.locators.choose_file_btn).get_attribute('value')
+
+    @photo.setter
     def photo(self, path: str):
-        choose_file = self.driver.find_element(*self.locators.choose_file_btn)
-        choose_file.send_keys(path)
+        self.driver.find_element(*self.locators.choose_file_btn).send_keys(path)
 
     def submit(self):
         self.element.find_element(*self.locators.submit_btn).click()
