@@ -16,7 +16,8 @@ class TestSignUp:
             "email_address": "nissim.david@Fmail.com",
             "phone": "0739118927",
             "gender": "male",
-            "country": "United States"
+            "country": "United States",
+            "date_of_birth": (12, "November", 2000)
         }
 
     def test_sign_up(self):
@@ -28,6 +29,7 @@ class TestSignUp:
         self.register.email_address = self.data["email_address"]
         self.register.gender = self.data["gender"]
         self.register.country = self.data["country"]
+        self.register.set_date_of_birth(*self.data["date_of_birth"])
 
         assert_that(self.register.first_name).is_equal_to(self.data["first_name"])
         assert_that(self.register.last_name).is_equal_to(self.data["last_name"])
@@ -35,6 +37,7 @@ class TestSignUp:
         assert_that(self.register.email_address).is_equal_to(self.data["email_address"])
         assert_that(self.register.gender).is_equal_to(self.data["gender"])
         assert_that(self.register.country).is_equal_to(self.data["country"])
+        assert_that(self.register.date_of_birth).is_equal_to(self.data["date_of_birth"])
 
         self.register.submit()
 

@@ -14,6 +14,9 @@ class RegisterLocators:
         self.required = (By.XPATH, "//label[contains(text(),'*')]")
         self.submit_btn = (By.XPATH, '//button[@id="submitbtn"]')
         self.refresh_btn = (By.XPATH, '//button[@value="Refresh"]')
+        self.date_of_birth_year = (By.XPATH, '//*[@id="yearbox"]')
+        self.date_of_birth_month = (By.XPATH, '//*[@ng-model="monthbox"]')
+        self.date_of_birth_day = (By.XPATH, '//*[@id="daybox"]')
 
 
 

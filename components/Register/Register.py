@@ -74,6 +74,31 @@ class Register:
         country_dropdown = Select(self.element.find_element(*self.locators.country_dropdown))
         country_dropdown.select_by_visible_text(country)
 
+    @property
+    def date_of_birth(self) -> tuple:
+        day_dropdown = Select(self.element.find_element(*self.locators.date_of_birth_day))
+        month_dropdown = Select(self.element.find_element(*self.locators.date_of_birth_month))
+        year_dropdown = Select(self.element.find_element(*self.locators.date_of_birth_year))
+
+        selected_day = int(day_dropdown.first_selected_option.get_attribute('value'))
+        selected_month = month_dropdown.first_selected_option.get_attribute('value')
+        selected_year = int(year_dropdown.first_selected_option.get_attribute('value'))
+        return selected_day, selected_month, selected_year
+
+    def set_date_of_birth(self, day: int, month: str, year: int):
+        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        if day not in range(1, 32):
+            raise ValueError(f"Expected day to be between 1 to 31, but actual {day}")
+        if month not in months:
+            raise ValueError(f"Unexpected month: {month}, should be in {months}")
+        day_dropdown = Select(self.element.find_element(*self.locators.date_of_birth_day))
+        month_dropdown = Select(self.element.find_element(*self.locators.date_of_birth_month))
+        year_dropdown = Select(self.element.find_element(*self.locators.date_of_birth_year))
+
+        day_dropdown.select_by_visible_text(str(day))
+        month_dropdown.select_by_visible_text(month)
+        year_dropdown.select_by_visible_text(str(year))
+
     def submit(self):
         self.element.find_element(*self.locators.submit_btn).click()
 
