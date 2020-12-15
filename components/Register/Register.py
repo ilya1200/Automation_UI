@@ -42,6 +42,7 @@ class Register:
 
     @phone.setter
     def phone(self, phone: str):
+        self.element.find_element(*self.locators.phone).clear()
         self.element.find_element(*self.locators.phone).send_keys(phone)
 
     @property
