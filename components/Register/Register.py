@@ -65,9 +65,7 @@ class Register:
     @property
     def country(self) -> str:
         country_dropdown = Select(self.element.find_element(*self.locators.country_dropdown))
-        selected_options = country_dropdown.all_selected_options
-        selected_option = selected_options[0].get_attribute('value')
-        return selected_option
+        return country_dropdown.first_selected_option.get_attribute('value')
 
     @country.setter
     def country(self, country: str):
