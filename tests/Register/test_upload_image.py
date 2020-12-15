@@ -40,6 +40,7 @@ class TestUploadImage:
         self.register.country = self.data["country"]
         self.register.password = self.data["password"]
         self.register.confirm_password = self.data["confirm_password"]
+        self.register.photo(r'C:\Users\user\Desktop\Automation_UI\assets\dog_image.jpg')
 
         assert_that(self.register.first_name).is_equal_to(self.data["first_name"])
         assert_that(self.register.last_name).is_equal_to(self.data["last_name"])

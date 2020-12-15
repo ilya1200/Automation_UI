@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import Select
+
 from components.Register.RegisterLocators import RegisterLocators
 
 
@@ -113,6 +114,10 @@ class Register:
     @confirm_password.setter
     def confirm_password(self, confirm_password: str):
         self.element.find_element(*self.locators.confirm_password).send_keys(confirm_password)
+
+    def photo(self, path: str):
+        choose_file = self.driver.find_element(*self.locators.choose_file_btn)
+        choose_file.send_keys(path)
 
     def submit(self):
         self.element.find_element(*self.locators.submit_btn).click()
