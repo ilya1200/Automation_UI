@@ -97,6 +97,22 @@ class Register:
         month_dropdown.select_by_visible_text(month)
         year_dropdown.select_by_visible_text(str(year))
 
+    @property
+    def password(self) -> str:
+        return self.element.find_element(*self.locators.password).get_attribute('value')
+
+    @password.setter
+    def password(self, password: str):
+        self.element.find_element(*self.locators.password).send_keys(password)
+
+    @property
+    def confirm_password(self) -> str:
+        return self.element.find_element(*self.locators.confirm_password).get_attribute('value')
+
+    @confirm_password.setter
+    def confirm_password(self, confirm_password: str):
+        self.element.find_element(*self.locators.confirm_password).send_keys(confirm_password)
+
     def submit(self):
         self.element.find_element(*self.locators.submit_btn).click()
 

@@ -17,6 +17,8 @@ class RegisterLocators:
         self.date_of_birth_year = (By.XPATH, '//*[@id="yearbox"]')
         self.date_of_birth_month = (By.XPATH, '//*[@ng-model="monthbox"]')
         self.date_of_birth_day = (By.XPATH, '//*[@id="daybox"]')
+        self.password = (By.XPATH, '//input[@id="firstpassword"]')
+        self.confirm_password = (By.XPATH, '//input[@id="secondpassword"]')
 
 
 

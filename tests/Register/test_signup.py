@@ -1,5 +1,7 @@
 from assertpy import assert_that
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 from components.Register.Register import Register
 
@@ -17,7 +19,9 @@ class TestSignUp:
             "phone": "0739118927",
             "gender": "male",
             "country": "United States",
-            "date_of_birth": (12, "November", 2000)
+            "date_of_birth": (12, "November", 2000),
+            "password": "Aa102030",
+            "confirm_password": "Aa102030"
         }
 
     def test_sign_up(self):
@@ -30,6 +34,8 @@ class TestSignUp:
         self.register.gender = self.data["gender"]
         self.register.country = self.data["country"]
         self.register.set_date_of_birth(*self.data["date_of_birth"])
+        self.register.password = self.data["password"]
+        self.register.confirm_password = self.data["confirm_password"]
 
         assert_that(self.register.first_name).is_equal_to(self.data["first_name"])
         assert_that(self.register.last_name).is_equal_to(self.data["last_name"])
@@ -40,6 +46,8 @@ class TestSignUp:
         assert_that(self.register.date_of_birth).is_equal_to(self.data["date_of_birth"])
 
         self.register.submit()
+        WebDriverWait(self.driver, 10).until(EC.url_to_be('http://demo.automationtesting.in/WebTable.html'))
+        assert_that(self.driver.current_url).is_equal_to('http://demo.automationtesting.in/WebTable.html')
 
     def teardown_class(self):
         self.driver.close()
