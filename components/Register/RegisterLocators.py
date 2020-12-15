@@ -19,6 +19,8 @@ class RegisterLocators:
         self.date_of_birth_day = (By.XPATH, '//*[@id="daybox"]')
         self.password = (By.XPATH, '//input[@id="firstpassword"]')
         self.confirm_password = (By.XPATH, '//input[@id="secondpassword"]')
+        self.choose_file_btn = (By.XPATH, '//*[@id="imagesrc"]')
+
 
 
 
