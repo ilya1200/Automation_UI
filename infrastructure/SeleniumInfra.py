@@ -13,8 +13,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 class SeleniumInfra:
     TIME_TO_WAIT = 20
 
-    def __init__(self):
-        self.driver = webdriver.Chrome(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
+    def __init__(self, driver_path: str):
+        self.driver = webdriver.Chrome(driver_path)
         self.driver.implicitly_wait(self.TIME_TO_WAIT)
         self.driver.maximize_window()
 
