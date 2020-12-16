@@ -1,3 +1,4 @@
 selenium
 pytest
 assertpy
+allure-pytest
