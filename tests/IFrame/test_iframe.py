@@ -1,7 +1,7 @@
 from assertpy import assert_that
-from selenium import webdriver
-from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.common.by import By
+
+from infrastructure.SeleniumInfra import SeleniumInfra
 
 
 class TestIFrames:
@@ -9,17 +9,15 @@ class TestIFrames:
     LOAD_WAIT = 7
 
     def setup_class(self):
-        self.driver = webdriver.Chrome(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
-        self.driver.implicitly_wait(self.LOAD_WAIT)
-        self.driver.maximize_window()
+        self.selenium_infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
 
     def test_iframes(self):
-        self.driver.get(self.FRAMES_URL)
-        self.driver.switch_to.frame('SingleFrame')
-        input = self.driver.find_element_by_tag_name('input')
-        input.send_keys("I am inside an iFrame")
-        assert_that(input.get_attribute("value")).is_equal_to("I am inside an iFrame")
+        self.selenium_infra.get(self.FRAMES_URL)
+        self.selenium_infra.driver.switch_to.frame('SingleFrame')
+        input = self.selenium_infra.find_element_by(By.TAG_NAME, 'input')
+        self.selenium_infra.write_into_element("I am inside an iFrame", element=input)
+        assert_that(self.selenium_infra.get_attribute_from_element("value", element=input)).is_equal_to("I am inside an iFrame")
 
     def teardown_class(self):
-        self.driver.close()
-        self.driver.quit()
+        self.selenium_infra.close()
+        self.selenium_infra.quit()
