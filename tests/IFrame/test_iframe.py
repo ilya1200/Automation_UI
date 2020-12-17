@@ -6,7 +6,6 @@ from infrastructure.SeleniumInfra import SeleniumInfra
 
 class TestIFrames:
     FRAMES_URL = "http://demo.automationtesting.in/Frames.html"
-    LOAD_WAIT = 7
 
     def setup_class(self):
         self.selenium_infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
