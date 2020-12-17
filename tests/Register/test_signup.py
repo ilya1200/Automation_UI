@@ -7,8 +7,7 @@ from pom.InitPOM.InitPOM import InitPOM
 class TestSignUp:
 
     def setup_class(self):
-        self.selenium_infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
-        self.pom = InitPOM(self.selenium_infra)
+        self.pom = InitPOM(SeleniumInfra())
         self.pages = self.pom.pages
 
         self.register_page = self.pages.register_page
@@ -62,5 +61,5 @@ class TestSignUp:
         assert_that(self.web_table_page.is_visible).is_true()
 
     def teardown_class(self):
-        self.selenium_infra.close()
-        self.selenium_infra.quit()
+        self.pom.selenium_infra.close()
+        self.pom.selenium_infra.quit()

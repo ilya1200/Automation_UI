@@ -8,7 +8,7 @@ class TestIFrames:
     FRAMES_URL = "http://demo.automationtesting.in/Frames.html"
 
     def setup_class(self):
-        self.selenium_infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
+        self.selenium_infra = SeleniumInfra()
 
     def test_iframes(self):
         self.selenium_infra.get(self.FRAMES_URL)
