@@ -21,7 +21,7 @@ class RegisterForm(Component):
 
     @property
     def first_name(self) -> str:
-        return self.infra.get_text(*self.locators.element, from_element=self.element)
+        return self.infra.get_attribute_from_element('value',*self.locators.first_name, from_element=self.element)
 
     @first_name.setter
     def first_name(self, f_name: str):

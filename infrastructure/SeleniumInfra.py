@@ -90,6 +90,13 @@ class SeleniumInfra:
         self.driver.get(url)
         self.driver.set_page_load_timeout(time_to_wait)
 
+    @property
+    def current_url(self) -> str:
+        return self.driver.current_url
+
+    def wait_for_url_to_be(self, url: str, time_to_wait: int = TIME_TO_WAIT):
+        WebDriverWait(self.driver, time_to_wait).until(EC.url_to_be(url))
+
     def close(self):
         self.driver.close()
 

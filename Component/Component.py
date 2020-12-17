@@ -8,7 +8,7 @@ class Component(ABC):
     def __init__(self, infra: SeleniumInfra, locators: Locators, **kwargs):
         self.infra = infra
         self.locators = locators
-        for key, value in kwargs:
+        for key, value in kwargs.items():
             self.__setattr__(key, value)
 
     @abstractmethod
