@@ -13,7 +13,7 @@ class TestAlerts:
 
     @allure.title("test_alert_box")
     def test_alerts(self):
-        with allure.step(f"When user goes Register Page"):
+        with allure.step(f"When user goes Alerts Page"):
             self.selenium_infra.get(self.ALERTS_URL)
             self.selenium_infra.screenshot_for_allure()
 
