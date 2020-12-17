@@ -33,7 +33,6 @@ class TestSignUp:
         self.invalid_phone = 10203040506070
 
     def test_sign_up(self):
-
         self.register.first_name = self.data["first_name"]
         self.register.last_name = self.data["last_name"]
         self.register.phone = self.invalid_phone
@@ -51,20 +50,19 @@ class TestSignUp:
 
         # Submit with Invalid password
         self.register.submit()
-        assert_that(self.infra.current_url).is_equal_to(self.register_page.url)
+        assert_that(self.register_page.is_visible).is_true()
         self.register.phone = self.data["phone"]
         assert_that(self.register.phone).is_equal_to(self.data["phone"])
 
         # Submit without Country - mandatory field
         self.register.submit()
-        assert_that(self.infra.current_url).is_equal_to(self.register_page.url)
+        assert_that(self.register_page.is_visible).is_true()
 
         # Submit valid form
         self.register.country = self.data["country"]
         assert_that(self.register.country).is_equal_to(self.data["country"])
         self.register.submit()
-        self.infra.wait_for_url_to_be(self.web_table_page.url)
-        assert_that(self.infra.current_url).is_equal_to(self.web_table_page.url)
+        assert_that(self.web_table_page.is_visible).is_true()
 
     def teardown_class(self):
         self.infra.close()

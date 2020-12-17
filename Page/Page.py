@@ -1,3 +1,5 @@
+from selenium.common.exceptions import TimeoutException
+
 from Component import Locators
 from Component.Component import Component
 from infrastructure.SeleniumInfra import SeleniumInfra
@@ -10,6 +12,10 @@ class Page(Component):
 
     @property
     def is_visible(self) -> bool:
+        try:
+            self.infra.wait_for_url_to_be(self.url)
+        except TimeoutException:
+            return False
         return self.infra.current_url == self.url
 
     def move_to_page(self):
