@@ -1,24 +1,20 @@
 from assertpy import assert_that
 
-from components.RegisterForm.RegisterForm import RegisterForm
-from components.RegisterForm.RegisterFormLocators import RegisterFormLocators
 from infrastructure.SeleniumInfra import SeleniumInfra
-from pages.RegisterPage.RegisterPage import RegisterPage
-from pages.RegisterPage.RegisterPageLocators import RegisterPageLocators
-from pages.WebTablePage.WebTablePage import WebTablePage
-from pages.WebTablePage.WebTablePageLocators import WebTablePageLocators
+from pages.InitPages.InitPages import InitPages
 
 
 class TestSignUp:
-    REGISTER_URL = "http://demo.automationtesting.in/Register.html"
-    WEB_TABLE_URL = 'http://demo.automationtesting.in/WebTable.html'
 
     def setup_class(self):
         self.infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
-        self.register_page = RegisterPage(self.infra, RegisterPageLocators(), self.REGISTER_URL, RegisterForm(self.infra, RegisterFormLocators()))
+        self.pages = InitPages(self.infra)
+
+        self.register_page = self.pages.register_page
+        self.register_form = self.register_page.register_form
+        self.web_table_page = self.pages.web_table_page
         self.register_page.move_to_page()
-        self.web_table_page = WebTablePage(self.infra, WebTablePageLocators(), self.WEB_TABLE_URL)
-        self.register = self.register_page.register_form
+
         self.data = {
             "first_name": "Nissim",
             "last_name": "David",
@@ -33,35 +29,35 @@ class TestSignUp:
         self.invalid_phone = 10203040506070
 
     def test_sign_up(self):
-        self.register.first_name = self.data["first_name"]
-        self.register.last_name = self.data["last_name"]
-        self.register.phone = self.invalid_phone
-        self.register.email_address = self.data["email_address"]
-        self.register.gender = self.data["gender"]
-        self.register.set_date_of_birth(*self.data["date_of_birth"])
-        self.register.password = self.data["password"]
-        self.register.confirm_password = self.data["confirm_password"]
+        self.register_form.first_name = self.data["first_name"]
+        self.register_form.last_name = self.data["last_name"]
+        self.register_form.phone = self.invalid_phone
+        self.register_form.email_address = self.data["email_address"]
+        self.register_form.gender = self.data["gender"]
+        self.register_form.set_date_of_birth(*self.data["date_of_birth"])
+        self.register_form.password = self.data["password"]
+        self.register_form.confirm_password = self.data["confirm_password"]
 
-        assert_that(self.register.first_name).is_equal_to(self.data["first_name"])
-        assert_that(self.register.last_name).is_equal_to(self.data["last_name"])
-        assert_that(self.register.email_address).is_equal_to(self.data["email_address"])
-        assert_that(self.register.gender).is_equal_to(self.data["gender"])
-        assert_that(self.register.date_of_birth).is_equal_to(self.data["date_of_birth"])
+        assert_that(self.register_form.first_name).is_equal_to(self.data["first_name"])
+        assert_that(self.register_form.last_name).is_equal_to(self.data["last_name"])
+        assert_that(self.register_form.email_address).is_equal_to(self.data["email_address"])
+        assert_that(self.register_form.gender).is_equal_to(self.data["gender"])
+        assert_that(self.register_form.date_of_birth).is_equal_to(self.data["date_of_birth"])
 
         # Submit with Invalid password
-        self.register.submit()
+        self.register_form.submit()
         assert_that(self.register_page.is_visible).is_true()
-        self.register.phone = self.data["phone"]
-        assert_that(self.register.phone).is_equal_to(self.data["phone"])
+        self.register_form.phone = self.data["phone"]
+        assert_that(self.register_form.phone).is_equal_to(self.data["phone"])
 
         # Submit without Country - mandatory field
-        self.register.submit()
+        self.register_form.submit()
         assert_that(self.register_page.is_visible).is_true()
 
         # Submit valid form
-        self.register.country = self.data["country"]
-        assert_that(self.register.country).is_equal_to(self.data["country"])
-        self.register.submit()
+        self.register_form.country = self.data["country"]
+        assert_that(self.register_form.country).is_equal_to(self.data["country"])
+        self.register_form.submit()
         assert_that(self.web_table_page.is_visible).is_true()
 
     def teardown_class(self):
