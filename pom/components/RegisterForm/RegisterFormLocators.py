@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
-from pom.Component.Locators import Locators
+
+from pom.components.Component.Locators import Locators
 
 
 class RegisterFormLocators(Locators):

@@ -1,6 +1,6 @@
 from infrastructure.SeleniumInfra import SeleniumInfra
-from pom.Page.Page import Page
-from pom.pages.WebTablePage import WebTablePageLocators
+from pom.pages.Page.Page import Page
+from pom.pages.WebTablePage.WebTablePageLocators import WebTablePageLocators
 
 
 class WebTablePage(Page):

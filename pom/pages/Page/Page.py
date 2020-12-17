@@ -1,7 +1,7 @@
 from selenium.common.exceptions import TimeoutException
 
-from pom.Component import Locators
-from pom.Component.Component import Component
+from pom.components.Component import Locators
+from pom.components.Component.Component import Component
 from infrastructure.SeleniumInfra import SeleniumInfra
 
 

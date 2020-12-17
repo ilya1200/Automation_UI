@@ -1,6 +1,6 @@
 from infrastructure.SeleniumInfra import SeleniumInfra
-from pom.Page.Page import Page
 from pom.components.RegisterForm.RegisterForm import RegisterForm
+from pom.pages.Page.Page import Page
 from pom.pages.RegisterPage.RegisterPageLocators import RegisterPageLocators
 
 

@@ -2,7 +2,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import Select
 
 from infrastructure.SeleniumInfra import SeleniumInfra
-from pom.Component.Component import Component
+from pom.components.Component.Component import Component
 from pom.components.RegisterForm.RegisterFormLocators import RegisterFormLocators
 
 

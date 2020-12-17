@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from pom.Component import Locators
+from pom.components.Component import Locators
 from infrastructure.SeleniumInfra import SeleniumInfra
 
 
