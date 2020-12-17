@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.service import Service
 
 
 class SeleniumInfra:
@@ -15,12 +16,12 @@ class SeleniumInfra:
     DRIVER_DEFAULT_PATH = r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe"
 
     def __init__(self, driver_path: str = DRIVER_DEFAULT_PATH):
-        self.driver = webdriver.Chrome(driver_path)
+        self.driver = webdriver.Chrome(service=Service(driver_path))
         self.driver.implicitly_wait(self.TIME_TO_WAIT)
         self.driver.maximize_window()
 
     def find_element_by(self, locator_type: By, locator_value: str, from_element: WebElement = None,
-                      time_to_wait: int = TIME_TO_WAIT) -> WebElement:
+                        time_to_wait: int = TIME_TO_WAIT) -> WebElement:
         if not from_element:
             from_element = self.driver
         return WebDriverWait(from_element, time_to_wait).until(
