@@ -1,14 +1,15 @@
 from assertpy import assert_that
 
 from infrastructure.SeleniumInfra import SeleniumInfra
-from pages.InitPages.InitPages import InitPages
+from pom.InitPOM.InitPOM import InitPOM
 
 
 class TestSignUp:
 
     def setup_class(self):
-        self.infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
-        self.pages = InitPages(self.infra)
+        self.selenium_infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
+        self.pom = InitPOM(self.selenium_infra)
+        self.pages = self.pom.pages
 
         self.register_page = self.pages.register_page
         self.register_form = self.register_page.register_form
@@ -61,5 +62,5 @@ class TestSignUp:
         assert_that(self.web_table_page.is_visible).is_true()
 
     def teardown_class(self):
-        self.infra.close()
-        self.infra.quit()
+        self.selenium_infra.close()
+        self.selenium_infra.quit()

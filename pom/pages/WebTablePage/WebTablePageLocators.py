@@ -1,4 +1,4 @@
-from Component.Locators import Locators
+from pom.Component.Locators import Locators
 
 
 class WebTablePageLocators(Locators):
