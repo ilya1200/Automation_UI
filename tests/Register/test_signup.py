@@ -5,16 +5,19 @@ from components.RegisterForm.RegisterFormLocators import RegisterFormLocators
 from infrastructure.SeleniumInfra import SeleniumInfra
 from pages.RegisterPage.RegisterPage import RegisterPage
 from pages.RegisterPage.RegisterPageLocators import RegisterPageLocators
+from pages.WebTablePage.WebTablePage import WebTablePage
+from pages.WebTablePage.WebTablePageLocators import WebTablePageLocators
 
 
 class TestSignUp:
     REGISTER_URL = "http://demo.automationtesting.in/Register.html"
-    WEB_TABlE_URL = 'http://demo.automationtesting.in/WebTable.html'
+    WEB_TABLE_URL = 'http://demo.automationtesting.in/WebTable.html'
 
     def setup_class(self):
         self.infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
         self.register_page = RegisterPage(self.infra, RegisterPageLocators(), self.REGISTER_URL, RegisterForm(self.infra, RegisterFormLocators()))
         self.register_page.move_to_page()
+        self.web_table_page = WebTablePage(self.infra, WebTablePageLocators(), self.WEB_TABLE_URL)
         self.register = self.register_page.register_form
         self.data = {
             "first_name": "Nissim",
@@ -60,8 +63,8 @@ class TestSignUp:
         self.register.country = self.data["country"]
         assert_that(self.register.country).is_equal_to(self.data["country"])
         self.register.submit()
-        self.infra.wait_for_url_to_be(self.WEB_TABlE_URL)
-        assert_that(self.infra.current_url).is_equal_to(self.WEB_TABlE_URL)
+        self.infra.wait_for_url_to_be(self.web_table_page.url)
+        assert_that(self.infra.current_url).is_equal_to(self.web_table_page.url)
 
     def teardown_class(self):
         self.infra.close()
