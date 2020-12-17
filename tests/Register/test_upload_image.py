@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from components.Register.Register import Register
+from components.RegisterForm.RegisterForm import RegisterForm
 
 
 class TestUploadImage:
@@ -15,7 +15,7 @@ class TestUploadImage:
         self.driver = webdriver.Chrome(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
         self.driver.implicitly_wait(self.LOAD_WAIT)
         self.driver.maximize_window()
-        self.register = Register(self.driver)
+        self.register = RegisterForm(self.driver)
         self.data = {
             "first_name": "Nissim",
             "last_name": "David",
