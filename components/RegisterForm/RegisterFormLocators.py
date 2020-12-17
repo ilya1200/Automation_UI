@@ -1,7 +1,8 @@
 from selenium.webdriver.common.by import By
+from Component.Locators import Locators
 
 
-class RegisterLocators:
+class RegisterFormLocators(Locators):
     def __init__(self):
         self.element = (By.XPATH, '//form[@id="basicBootstrapForm"]')
         self.first_name = (By.XPATH, '//input[@ng-model="FirstName"]')

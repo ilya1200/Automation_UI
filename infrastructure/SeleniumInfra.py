@@ -54,9 +54,11 @@ class SeleniumInfra:
     def write_into_element(self, data: str, locator_type: By = None, locator_value: str = None,
                            element: WebElement = None,
                            from_element: WebElement = None,
-                           time_to_wait: int = TIME_TO_WAIT):
+                           time_to_wait: int = TIME_TO_WAIT, should_clear_element: bool = True):
         if not element:
             element = self.find_element_by(locator_type, locator_value, from_element, time_to_wait)
+        if should_clear_element:
+            self.clear_element(element=element)
         element.send_keys(data)
 
     def get_attribute_from_element(self, attribute_name: str, locator_type: By = None, locator_value: str = None,

@@ -3,7 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from components.Register.Register import Register
+from components.RegisterForm.RegisterForm import RegisterForm
+from infrastructure.SeleniumInfra import SeleniumInfra
+from pages.RegisterPage.RegisterPage import RegisterPage
+from pages.RegisterPage.RegisterPageLocators import RegisterPageLocators
 
 
 class TestSignUp:
@@ -12,10 +15,8 @@ class TestSignUp:
     LOAD_WAIT = 7
 
     def setup_class(self):
-        self.driver = webdriver.Chrome(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
-        self.driver.implicitly_wait(self.LOAD_WAIT)
-        self.driver.maximize_window()
-        self.register = Register(self.driver)
+        self.infra = SeleniumInfra(r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe")
+        self.register_page = RegisterPage(self.infra, RegisterPageLocators())
         self.data = {
             "first_name": "Nissim",
             "last_name": "David",
