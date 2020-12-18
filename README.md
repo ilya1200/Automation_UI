@@ -3,7 +3,7 @@ Selenium Infrastructure
 
 # Installation
   1. pip install -r requirements.txt
-  2. Download chromedriver
+  2. Download chromedriver: https://chromedriver.chromium.org/downloads
   3. Place the driver into: Automation_UI/drivers/chromedriver.exe
   
 # Run tests
