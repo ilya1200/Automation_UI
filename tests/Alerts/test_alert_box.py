@@ -2,11 +2,12 @@ import allure
 from assertpy import assert_that
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.common.by import By
+
+from config import ALERTS_PAGE_URL
 from infrastructure.SeleniumInfra import SeleniumInfra
 
 
 class TestAlerts:
-    ALERTS_URL = "http://demo.automationtesting.in/Alerts.html"
 
     def setup_class(self):
         self.selenium_infra = SeleniumInfra()
@@ -14,7 +15,7 @@ class TestAlerts:
     @allure.title("test_alert_box")
     def test_alerts(self):
         with allure.step(f"When user goes Alerts Page"):
-            self.selenium_infra.get(self.ALERTS_URL)
+            self.selenium_infra.get(ALERTS_PAGE_URL)
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"And click on the display alert button"):

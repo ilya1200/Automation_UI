@@ -2,11 +2,10 @@ import allure
 from assertpy import assert_that
 from selenium.webdriver.common.by import By
 
-from infrastructure.SeleniumInfra import SeleniumInfra
+from infrastructure.SeleniumInfra import SeleniumInfra, FRAMES_PAGE_URL
 
 
 class TestIFrames:
-    FRAMES_URL = "http://demo.automationtesting.in/Frames.html"
 
     def setup_class(self):
         self.selenium_infra = SeleniumInfra()
@@ -16,7 +15,7 @@ class TestIFrames:
 
     def test_iframes(self):
         with allure.step(f"When user goes Frames Page"):
-            self.selenium_infra.get(self.FRAMES_URL)
+            self.selenium_infra.get(FRAMES_PAGE_URL)
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"And enter {self.data['input']} into the input field"):

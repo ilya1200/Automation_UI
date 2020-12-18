@@ -4,20 +4,19 @@ import allure
 from allure_commons.types import AttachmentType
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.chrome.service import Service
+from config import *
 
 
 class SeleniumInfra:
-    TIME_TO_WAIT = 20
-    DRIVER_DEFAULT_PATH = r"C:\\Users\\user\\Desktop\\Automation_UI\\drivers\\chromedriver.exe"
 
-    def __init__(self, driver_path: str = DRIVER_DEFAULT_PATH):
-        self.driver = webdriver.Chrome(service=Service(driver_path))
-        self.driver.implicitly_wait(self.TIME_TO_WAIT)
+    def __init__(self):
+        self.driver = webdriver.Chrome(service=Service(CHROME_DRIVER_PATH))
+        self.driver.implicitly_wait(TIME_TO_WAIT)
         self.driver.maximize_window()
 
     def find_element_by(self, locator_type: By, locator_value: str, from_element: WebElement = None,
