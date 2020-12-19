@@ -1,6 +1,6 @@
 from config import REGISTER_PAGE_URL, WEB_TABLE_PAGE_URL
 from infrastructure.SeleniumInfra import SeleniumInfra
-from pom.components.InitComponents.InitComponents import InitComponents
+from pom.InitPOM.InitComponents import InitComponents
 from pom.pages.RegisterPage.RegisterPage import RegisterPage
 from pom.pages.RegisterPage.RegisterPageLocators import RegisterPageLocators
 from pom.pages.WebTablePage.WebTablePage import WebTablePage
