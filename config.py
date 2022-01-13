@@ -11,3 +11,7 @@ REGISTER_PAGE_URL = "http://demo.automationtesting.in/Register.html"
 WEB_TABLE_PAGE_URL = 'http://demo.automationtesting.in/WebTable.html'
 FRAMES_PAGE_URL = "http://demo.automationtesting.in/Frames.html"
 ALERTS_PAGE_URL = "http://demo.automationtesting.in/Alerts.html"
+
+# IronSource URLs
+ISRONSOURCE_URL = "https://company.is.com/"
+CAREERS_ISRAEL_PAGE_URL = "https://company.is.com/careers-israel/"
