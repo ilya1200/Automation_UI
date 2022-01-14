@@ -4,7 +4,7 @@ from pom.components.Component.Locators import Locators
 
 class CareerItemLocators(Locators):
     def __init__(self, index: int):
-        self.element = (By.XPATH, f'(//*[contains(@class,"career-item")])[{index+1}]')
+        self.element = None if index is None else (By.XPATH,  f'(//*[contains(@class,"career-item")])[{index+1}]')
         self.link = (By.XPATH, ".//*[contains(@class, 'fw-link')]")
         self.title = (By.CSS_SELECTOR, ".row a")
         self.subtitle = (By.CSS_SELECTOR, ".row .small")

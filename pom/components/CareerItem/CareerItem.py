@@ -1,23 +1,28 @@
 from typing import List
-
 from selenium.webdriver.remote.webelement import WebElement
-
 from infrastructure.SeleniumInfra import SeleniumInfra
 from pom.components.CareerItem.CareerItemLocators import CareerItemLocators
 from pom.components.Component.Component import Component
 
 
 class CareerItem(Component):
-    def __init__(self, selenium_infra: SeleniumInfra, locators: CareerItemLocators, **kwargs):
+    def __init__(self, selenium_infra: SeleniumInfra, locators: CareerItemLocators, element: WebElement = None, **kwargs):
         super().__init__(selenium_infra, locators, **kwargs)
         self.locators: CareerItemLocators = locators
+        self._element: WebElement = element
 
     @property
     def element(self) -> WebElement:
-        return self.selenium_infra.find_element_by(*self.locators.element)
+        return self._element if self._element else self.selenium_infra.find_element_by(*self.locators.element)
+
+    @element.setter
+    def element(self, element: WebElement):
+        self._element = element
 
     @property
     def is_visible(self) -> bool:
+        if self._element:
+            return self.selenium_infra.is_element_exist(element=self._element)
         return self.selenium_infra.is_element_exist(*self.locators.element)
 
     @property
@@ -38,7 +43,8 @@ class CareerItem(Component):
 
     @property
     def tags(self) -> List[str]:
-        tags_elements: List[WebElement] = self.selenium_infra.find_element_list_by(*self.locators.tags, from_element=self.element)
+        tags_elements: List[WebElement] = self.selenium_infra.find_element_list_by(*self.locators.tags,
+                                                                                   from_element=self.element)
         return list(map(lambda tags_element: tags_element.text(), tags_elements))
 
     def explore_position(self):
