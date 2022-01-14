@@ -3,18 +3,20 @@ from assertpy import assert_that
 
 from infrastructure.SeleniumInfra import SeleniumInfra
 from pom.InitPOM.InitPOM import InitPOM
+from pom.components.CareersList.CareersList import CareersList
+from pom.pages.CareersPage.CareersPage import CareersPage
 
 
 class TestCareers:
 
     def setup_class(self):
-        self.selenium_infra = SeleniumInfra()
-        self.pom = InitPOM(self.selenium_infra)
+        self.selenium_infra: SeleniumInfra = SeleniumInfra()
+        self.pom: InitPOM = InitPOM(self.selenium_infra)
         self.pages = self.pom.pages
-        self.careers_page = self.pages.careers_page
-        self.careers_list = self.careers_page.careers_list
-        self.careers_number = 0
-        self.careers_number_counted = 0
+        self.careers_page: CareersPage = self.pages.careers_page
+        self.careers_list: CareersList = self.careers_page.careers_list
+        self.careers_number: int = 0
+        self.careers_number_counted: int = 0
 
     @allure.title("test_careers")
     def test_careers(self):
@@ -23,11 +25,11 @@ class TestCareers:
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"And view the number of Open Positions"):
-            self.carriers_number = self.careers_list.open_positions
+            self.careers_number = self.careers_list.open_positions
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"When user count Open Position"):
-            self.carriers_number_counted = self.careers_list.count_open_positions()
+            self.careers_number_counted = self.careers_list.count_open_positions()
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"Then should see the same amount"):

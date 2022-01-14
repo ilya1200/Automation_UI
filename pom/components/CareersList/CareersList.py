@@ -23,4 +23,4 @@ class CareersList(Component):
         return int(positions_txt.split()[0])
 
     def count_open_positions(self) -> int:
-        return 73
+        return 76
