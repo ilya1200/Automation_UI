@@ -44,12 +44,12 @@ class CareersList(Component):
 
         return career_items
 
-    def load_more_position(self):
+    def load_more_positions(self):
         self.selenium_infra.click_element(*self.locators.load_more_btn, from_element=self.element)
 
     def expand_all_positions(self):
         while self.is_load_more_visible:
-            self.load_more_position()
+            self.load_more_positions()
 
     def count_open_positions(self) -> int:
         return len(self.items)
