@@ -1,5 +1,9 @@
+from typing import List
+
 from selenium.webdriver.remote.webelement import WebElement
 from infrastructure.SeleniumInfra import SeleniumInfra
+from pom.components.CareerItem.CareerItem import CareerItem
+from pom.components.CareerItem.CareerItemLocators import CareerItemLocators
 from pom.components.Component.Component import Component
 from pom.components.CareersList.CareersListLocators import CareersListLocators
 
@@ -7,7 +11,7 @@ from pom.components.CareersList.CareersListLocators import CareersListLocators
 class CareersList(Component):
     def __init__(self, selenium_infra: SeleniumInfra, locators: CareersListLocators, **kwargs):
         super().__init__(selenium_infra, locators, **kwargs)
-        self.locators = locators
+        self.locators: CareersListLocators = locators
 
     @property
     def element(self) -> WebElement:
@@ -26,6 +30,20 @@ class CareersList(Component):
     def is_load_more_visible(self) -> bool:
         return self.selenium_infra.is_element_exist(*self.locators.load_more_btn, from_element=self.element)
 
+    @property
+    def items(self) -> List[CareerItem]:
+        career_items: List[CareerItem] = list()
+
+        index = 0
+        while True:
+            career_item: CareerItem = CareerItem(self.selenium_infra, CareerItemLocators(index))
+            if not career_item.is_visible:
+                break
+            career_items.append(career_item)
+            index += 1
+
+        return career_items
+
     def load_more_position(self):
         self.selenium_infra.click_element(*self.locators.load_more_btn, from_element=self.element)
 
@@ -34,5 +52,4 @@ class CareersList(Component):
             self.load_more_position()
 
     def count_open_positions(self) -> int:
-        counter: int = 0
-        return counter
+        return len(self.items)
