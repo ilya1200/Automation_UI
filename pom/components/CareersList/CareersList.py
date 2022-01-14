@@ -22,5 +22,17 @@ class CareersList(Component):
         positions_txt = self.selenium_infra.get_text(*self.locators.open_positions, from_element=self.element)
         return int(positions_txt.split()[0])
 
+    @property
+    def is_load_more_visible(self) -> bool:
+        return self.selenium_infra.is_element_exist(*self.locators.load_more_btn, from_element=self.element)
+
+    def load_more_position(self):
+        self.selenium_infra.click_element(*self.locators.load_more_btn, from_element=self.element)
+
+    def expand_all_positions(self):
+        while self.is_load_more_visible:
+            self.load_more_position()
+
     def count_open_positions(self) -> int:
-        return 76
+        counter: int = 0
+        return counter

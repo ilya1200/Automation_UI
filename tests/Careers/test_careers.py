@@ -29,6 +29,7 @@ class TestCareers:
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"When user count Open Position"):
+            self.careers_list.expand_all_positions()
             self.careers_number_counted = self.careers_list.count_open_positions()
             self.selenium_infra.screenshot_for_allure()
 
