@@ -1,3 +1,5 @@
+from typing import List
+
 import allure
 from assertpy import assert_that
 
@@ -17,6 +19,7 @@ class TestCareers:
         self.home_page: HomePage = self.pages.home_page
         self.about_page: AboutPage = self.pages.about_page
         self.navigator: Navigator = self.home_page.navigator
+        self.expected_headers: List[str] = ["Our News", "What TBA Has to Offer", "Who Is The TBA Team?", "TBA’S Mission", "Disclaimer"]
 
     @allure.title("test_about")
     def test_about(self):
@@ -31,6 +34,9 @@ class TestCareers:
             self.selenium_infra.screenshot_for_allure()
 
         with allure.step(f"Then user should see the sections"):
+            actual_headers_lower: List[str] = list(map(lambda header: header.lower(), self.about_page.headers))
+            expected_headers_lower: List[str] = list(map(lambda header: header.lower(), self.expected_headers))
+            assert_that(actual_headers_lower).is_equal_to(expected_headers_lower)
             self.selenium_infra.screenshot_for_allure()
 
     def teardown_class(self):
